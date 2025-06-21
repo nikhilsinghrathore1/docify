@@ -1,5 +1,4 @@
 const axios = require('axios');
-const crypto = require('crypto');
 
 class GeminiService {
     constructor() {
@@ -7,65 +6,6 @@ class GeminiService {
         this.baseURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
         this.model = 'gemini-1.5-flash-latest';
         this.maxTokens = 8000; // Increased for more detailed content
-        this.asciiArtStyles = [
-            'block', 'shadow', 'slant', 'bubble', 'digital', 'graffiti', 
-            'gothic', 'isometric', 'script', 'banner', 'dotted', 'starwars'
-        ];
-        this.emojiSets = [
-            ['🚀', '⭐', '💫', '✨', '🌟'],
-            ['🔥', '💎', '⚡', '🌈', '🎯'],
-            ['🎨', '🎭', '🎪', '🎊', '🎉'],
-            ['💻', '🖥️', '📱', '⌨️', '🖱️'],
-            ['🛠️', '🔧', '⚙️', '🔩', '🧰'],
-            ['🌐', '🔗', '📡', '🛰️', '📶']
-        ];
-    }
-
-    generateCommitBasedSeed(repository) {
-        // Create a unique seed based on repository info and current timestamp
-        const seedString = `${repository.name}-${repository.owner.login}-${Date.now()}`;
-        return crypto.createHash('md5').update(seedString).digest('hex');
-    }
-
-    selectRandomElement(array, seed) {
-        // Use seed to ensure consistent randomness within the same generation
-        const seedNumber = parseInt(seed.substring(0, 8), 16);
-        return array[seedNumber % array.length];
-    }
-
-    generateDynamicAsciiPrompt(projectName, seed) {
-        const asciiStyle = this.selectRandomElement(this.asciiArtStyles, seed);
-        const emojiSet = this.selectRandomElement(this.emojiSets, seed);
-        
-        return `Create a unique ASCII art banner for "${projectName}" using ${asciiStyle} style. 
-        Make it visually striking and different from standard templates. 
-        Surround it with ${emojiSet.join(' ')} emojis for decoration.
-        Use creative spacing and alignment. Make it memorable and distinctive.
-        The ASCII art should be contained within markdown code blocks with proper formatting.`;
-    }
-
-    generateDynamicBadgeLayout(seed) {
-        const layouts = [
-            'horizontal-grid', 'vertical-stack', 'badge-gallery', 
-            'grouped-categories', 'rainbow-arrangement', 'star-pattern'
-        ];
-        const selectedLayout = this.selectRandomElement(layouts, seed);
-        
-        return `Arrange badges in a ${selectedLayout} layout using markdown tables and creative spacing. 
-        Make the badge arrangement visually unique and eye-catching.`;
-    }
-
-    generateDynamicColorScheme(seed) {
-        const colorSchemes = [
-            { primary: 'blue', secondary: 'cyan', accent: 'purple' },
-            { primary: 'green', secondary: 'lime', accent: 'teal' },
-            { primary: 'red', secondary: 'orange', accent: 'pink' },
-            { primary: 'purple', secondary: 'violet', accent: 'indigo' },
-            { primary: 'orange', secondary: 'yellow', accent: 'amber' },
-            { primary: 'teal', secondary: 'aqua', accent: 'mint' }
-        ];
-        
-        return this.selectRandomElement(colorSchemes, seed);
     }
 
     async generateReadme(files, repository) {
@@ -88,9 +28,9 @@ class GeminiService {
                     ],
                     generationConfig: {
                         maxOutputTokens: this.maxTokens,
-                        temperature: 0.9, // Increased for more variety
-                        topP: 0.95,
-                        topK: 50
+                        temperature: 0.8, // Slightly higher for more creativity
+                        topP: 0.9,
+                        topK: 40
                     },
                     safetySettings: [
                         {
@@ -139,31 +79,18 @@ class GeminiService {
     buildEnhancedPrompt(files, repository) {
         const techStack = this.detectTechStack(files);
         const projectType = this.detectProjectType(files, repository);
-        const seed = this.generateCommitBasedSeed(repository);
-        const colorScheme = this.generateDynamicColorScheme(seed);
-        const emojiSet = this.selectRandomElement(this.emojiSets, seed);
         
-        let prompt = `Create an exceptionally visually appealing and UNIQUE README.md file for this ${projectType} project using ONLY pure Markdown syntax. `;
+        let prompt = `Create an exceptionally visually appealing and professional README.md file for this ${projectType} project using ONLY pure Markdown syntax. `;
         prompt += `The repository is "${repository.name}" by "${repository.owner.login}". `;
-        prompt += `IMPORTANT: Make this README visually DIFFERENT from any standard template. Use creative layouts and unique designs. `;
     
         if (repository.description) {
             prompt += `Description: "${repository.description}". `;
         }
-
-        // Dynamic ASCII Art Instructions
-        prompt += `\n\n🎨 UNIQUE VISUAL DESIGN REQUIREMENTS:\n`;
-        prompt += this.generateDynamicAsciiPrompt(repository.name, seed);
-        prompt += `\n${this.generateDynamicBadgeLayout(seed)}\n`;
-        prompt += `- Use ${emojiSet.join(' ')} as primary emoji theme throughout\n`;
-        prompt += `- Create a ${colorScheme.primary}-${colorScheme.secondary} color scheme for badges\n`;
-        prompt += `- Make every visual element unique and memorable\n`;
-        prompt += `- Avoid generic templates - be creative and distinctive\n\n`;
     
-        prompt += `🎯 PURE MARKDOWN DESIGN REQUIREMENTS:\n`;
-        prompt += `- Use strategic and varied emojis throughout (focus on: ${emojiSet.join(' ')})\n`;
-        prompt += `- Include colorful badges from shields.io with ${colorScheme.primary} and ${colorScheme.secondary} colors\n`;
-        prompt += `- Create UNIQUE ASCII art banners using code blocks - make them distinctive\n`;
+        prompt += `\n\n🎯 PURE MARKDOWN DESIGN REQUIREMENTS:\n`;
+        prompt += `- Use strategic emojis throughout (🚀 🔥 ✨ 💫 🎨 🛠️ 📚 🌟 ⚡ 💡 🎯 📦 🔧 💻 📱 🌐 📊)\n`;
+        prompt += `- Include colorful badges from shields.io using markdown image syntax\n`;
+        prompt += `- Create ASCII art banners using code blocks with proper formatting\n`;
         prompt += `- Use markdown horizontal rules (---) for visual section separation\n`;
         prompt += `- Leverage markdown tables for organized data presentation\n`;
         prompt += `- Use nested lists and proper indentation for hierarchy\n`;
@@ -173,23 +100,14 @@ class GeminiService {
         prompt += `- Create badge galleries using aligned markdown image syntax\n`;
         prompt += `- Use markdown details/summary for collapsible sections\n`;
         prompt += `- Implement consistent spacing and formatting patterns\n\n`;
-
-        prompt += `🌟 UNIQUENESS REQUIREMENTS:\n`;
-        prompt += `- Generate timestamp: ${new Date().toISOString()}\n`;
-        prompt += `- Seed: ${seed.substring(0, 8)}\n`;
-        prompt += `- ASCII style: Use creative ${this.selectRandomElement(this.asciiArtStyles, seed)} styling\n`;
-        prompt += `- Badge arrangement: Create a unique ${this.selectRandomElement(['grid', 'flow', 'cascade', 'spiral', 'wave'])} pattern\n`;
-        prompt += `- Color theme: ${colorScheme.primary}/${colorScheme.secondary}/${colorScheme.accent}\n`;
-        prompt += `- Make every section visually distinct from standard README templates\n`;
-        prompt += `- Use creative spacing, alignment, and visual hierarchy\n\n`;
     
-        prompt += `📋 REQUIRED SECTIONS (with unique styling):\n`;
-        prompt += `1. 🎨 UNIQUE header with distinctive ASCII title art, tagline, and creative badge gallery\n`;
-        prompt += `2. 🌟 Feature highlights using markdown lists with themed emojis\n`;
-        prompt += `3. 🛠️ Tech stack displayed as creative badge arrangements\n`;
+        prompt += `📋 REQUIRED SECTIONS (pure markdown styling):\n`;
+        prompt += `1. 🎨 Stunning header with ASCII title art, tagline, and badge gallery\n`;
+        prompt += `2. 🌟 Feature highlights using markdown lists with emojis\n`;
+        prompt += `3. 🛠️ Tech stack displayed as badge grid using markdown tables\n`;
         prompt += `4. 🚀 Quick start guide with syntax-highlighted code blocks\n`;
         prompt += `5. 📖 Detailed usage with multiple code examples and explanations\n`;
-        prompt += `6. 🏗️ Project structure using markdown code blocks or creative lists\n`;
+        prompt += `6. 🏗️ Project structure using markdown code blocks or lists\n`;
         prompt += `7. 🎯 API documentation with markdown tables and code samples\n`;
         prompt += `8. 🔧 Configuration options in well-formatted tables\n`;
         prompt += `9. 📸 Screenshots/Demo section with image galleries\n`;
@@ -200,7 +118,7 @@ class GeminiService {
     
         prompt += `🎭 MARKDOWN STYLE GUIDELINES:\n`;
         prompt += `- NO HTML tags - use only pure markdown syntax\n`;
-        prompt += `- Create UNIQUE visual hierarchy with proper heading levels\n`;
+        prompt += `- Create visual hierarchy with proper heading levels\n`;
         prompt += `- Use markdown tables for structured data (| Column | Column |)\n`;
         prompt += `- Implement collapsible sections with <details><summary> markdown\n`;
         prompt += `- Use code fences with language specification (\`\`\`javascript)\n`;
@@ -208,25 +126,25 @@ class GeminiService {
         prompt += `- Use blockquotes (>) for highlighting important information\n`;
         prompt += `- Align badges and images using markdown link syntax\n`;
         prompt += `- Use bullet points (- * +) and numbered lists effectively\n`;
-        prompt += `- Create DISTINCTIVE ASCII art in code blocks for visual appeal\n\n`;
+        prompt += `- Create ASCII art in code blocks for visual appeal\n\n`;
     
         if (techStack.length > 0) {
             prompt += `🔍 DETECTED TECHNOLOGIES: ${techStack.join(', ')}\n`;
-            prompt += `Create a beautiful and UNIQUE badge gallery for these technologies using shields.io markdown syntax with ${colorScheme.primary} theme.\n\n`;
+            prompt += `Create a beautiful badge gallery for these technologies using shields.io markdown syntax.\n\n`;
         }
     
         prompt += `💼 PROJECT TYPE: ${projectType}\n`;
-        prompt += `Structure the README specifically for this project type using appropriate and CREATIVE markdown formatting.\n\n`;
+        prompt += `Structure the README specifically for this project type using appropriate markdown formatting.\n\n`;
     
-        prompt += `🎨 UNIQUE MARKDOWN VISUAL ELEMENTS TO INCLUDE:\n`;
-        prompt += `- DISTINCTIVE ASCII art headers in code blocks (avoid generic designs)\n`;
+        prompt += `🎨 MARKDOWN VISUAL ELEMENTS TO INCLUDE:\n`;
+        prompt += `- ASCII art headers in code blocks\n`;
         prompt += `- Mermaid diagrams (graph TD, flowchart, etc.) in code fences\n`;
-        prompt += `- Well-structured tables with proper alignment and creative headers\n`;
+        prompt += `- Well-structured tables with proper alignment\n`;
         prompt += `- Collapsible FAQ using <details><summary> markdown\n`;
         prompt += `- Progress roadmap using markdown task lists (- [x] - [ ])\n`;
-        prompt += `- Feature lists with themed emoji bullets and descriptions\n`;
+        prompt += `- Feature lists with emoji bullets and descriptions\n`;
         prompt += `- Code blocks with syntax highlighting for multiple languages\n`;
-        prompt += `- CREATIVE badge arrangements in markdown tables for organization\n`;
+        prompt += `- Badge arrangements in markdown tables for organization\n`;
         prompt += `- Nested lists for hierarchical information\n`;
         prompt += `- Blockquotes for warnings, tips, and important notes\n\n`;
     
@@ -238,15 +156,9 @@ class GeminiService {
         prompt += `- Use markdown reference-style links for cleaner appearance\n`;
         prompt += `- Implement proper code block language tags for syntax highlighting\n`;
         prompt += `- Use horizontal rules strategically for section separation\n\n`;
-
-        prompt += `🚨 CRITICAL UNIQUENESS REQUIREMENT:\n`;
-        prompt += `This README must be visually DIFFERENT from standard templates. `;
-        prompt += `Create something memorable and distinctive that stands out. `;
-        prompt += `Use the seed ${seed.substring(0, 8)} to ensure uniqueness. `;
-        prompt += `Every generation should look different from the last!\n\n`;
     
-        prompt += `Make this README visually stunning and UNIQUE using ONLY markdown features. It should be engaging, `;
-        prompt += `professional, distinctive, and demonstrate mastery of markdown formatting while making developers `;
+        prompt += `Make this README visually stunning using ONLY markdown features. It should be engaging, `;
+        prompt += `professional, and demonstrate mastery of markdown formatting while making developers `;
         prompt += `excited to use and contribute to the project!\n\n`;
         prompt += `📁 PROJECT FILES ANALYSIS:\n\n`;
     
@@ -324,7 +236,7 @@ class GeminiService {
         // Check for specific project types
         if (name.includes('api') || description.includes('api')) return 'REST API';
         if (name.includes('bot') || description.includes('bot')) return 'Bot Application';
-        if (name.includes('cli') || description.includes('command line')) return 'CLI Tool';
+        if (name.includes('cli') || description.includes('command sline')) return 'CLI Tool';
         if (name.includes('lib') || name.includes('library')) return 'Library/Package';
         if (name.includes('app') || description.includes('application')) return 'Application';
         if (name.includes('web') || description.includes('website')) return 'Web Application';
@@ -349,58 +261,33 @@ class GeminiService {
         const ownerName = repository.owner.login;
         const description = repository.description || 'An amazing software project';
         const repoUrl = `https://github.com/${ownerName}/${repoName}`;
-        const seed = this.generateCommitBasedSeed(repository);
-        const colorScheme = this.generateDynamicColorScheme(seed);
-        const emojiSet = this.selectRandomElement(this.emojiSets, seed);
-
-        // Generate unique ASCII art based on seed
-        const asciiVariations = [
-            `
-╔═══════════════════════════════════════════════════════════╗
-║  ${emojiSet[0]}  ${repoName.toUpperCase().padEnd(45)} ${emojiSet[1]}  ║
-╚═══════════════════════════════════════════════════════════╝
-            `,
-            `
-    ${emojiSet[0]}${emojiSet[1]}${emojiSet[2]}  ${repoName.toUpperCase()}  ${emojiSet[2]}${emojiSet[1]}${emojiSet[0]}
-    ════════════════════════════════════════════════
-            `,
-            `
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░ ${emojiSet[0]}  ${repoName.toUpperCase()}  ${emojiSet[1]} ░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-            `
-        ];
-
-        const selectedAscii = this.selectRandomElement(asciiVariations, seed);
 
         return `<div align="center">
 
-\`\`\`
-${selectedAscii}
-\`\`\`
+# 🚀 ${repoName}
 
-### ${emojiSet[0]} ${description} ${emojiSet[1]}
+### ✨ ${description} ✨
 
-[![GitHub stars](https://img.shields.io/github/stars/${ownerName}/${repoName}?style=for-the-badge&logo=github&color=${colorScheme.primary})](${repoUrl}/stargazers)
-[![GitHub license](https://img.shields.io/github/license/${ownerName}/${repoName}?style=for-the-badge&color=${colorScheme.secondary})](${repoUrl}/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/${ownerName}/${repoName}?style=for-the-badge&color=${colorScheme.accent})](${repoUrl}/issues)
-[![GitHub forks](https://img.shields.io/github/forks/${ownerName}/${repoName}?style=for-the-badge&color=${colorScheme.primary})](${repoUrl}/network)
+[![GitHub stars](https://img.shields.io/github/stars/${ownerName}/${repoName}?style=for-the-badge&logo=github)](${repoUrl}/stargazers)
+[![GitHub license](https://img.shields.io/github/license/${ownerName}/${repoName}?style=for-the-badge)](${repoUrl}/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/${ownerName}/${repoName}?style=for-the-badge)](${repoUrl}/issues)
+[![GitHub forks](https://img.shields.io/github/forks/${ownerName}/${repoName}?style=for-the-badge)](${repoUrl}/network)
 
 </div>
 
 ---
 
-## ${emojiSet[2]} Features
+## 🌟 Features
 
-- ${emojiSet[3]} **Fast & Efficient** - Optimized for performance
-- ${emojiSet[4]} **Easy to Use** - Simple and intuitive interface
+- ⚡ **Fast & Efficient** - Optimized for performance
+- 🛠️ **Easy to Use** - Simple and intuitive interface
 - 📦 **Lightweight** - Minimal dependencies
 - 🔧 **Customizable** - Highly configurable
 - 🌐 **Cross-Platform** - Works everywhere
 
 ---
 
-## ${emojiSet[0]} Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -422,7 +309,7 @@ npm install
 pip install -r requirements.txt
 \`\`\`
 
-### ${emojiSet[1]} Usage
+### 🎯 Usage
 
 \`\`\`bash
 # 🏃‍♂️ Run the project
@@ -474,7 +361,7 @@ ${repoName}/
 
 ## 🤝 Contributing
 
-We love contributions! ${emojiSet[4]}
+We love contributions! 🎉
 
 1. 🍴 **Fork** the repository
 2. 🌿 **Create** a feature branch (\`git checkout -b feature/amazing-feature\`)
@@ -488,10 +375,10 @@ We love contributions! ${emojiSet[4]}
 
 <div align="center">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/${ownerName}/${repoName}?style=flat-square&color=${colorScheme.primary})
-![GitHub language count](https://img.shields.io/github/languages/count/${ownerName}/${repoName}?style=flat-square&color=${colorScheme.secondary})
-![GitHub top language](https://img.shields.io/github/languages/top/${ownerName}/${repoName}?style=flat-square&color=${colorScheme.accent})
-![GitHub last commit](https://img.shields.io/github/last-commit/${ownerName}/${repoName}?style=flat-square&color=${colorScheme.primary})
+![GitHub repo size](https://img.shields.io/github/repo-size/${ownerName}/${repoName}?style=flat-square)
+![GitHub language count](https://img.shields.io/github/languages/count/${ownerName}/${repoName}?style=flat-square)
+![GitHub top language](https://img.shields.io/github/languages/top/${ownerName}/${repoName}?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/${ownerName}/${repoName}?style=flat-square)
 
 </div>
 
@@ -507,7 +394,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 If you found this project helpful, please consider:
 
-- ${emojiSet[0]} **Starring** the repository
+- ⭐ **Starring** the repository
 - 🐛 **Reporting** bugs
 - 💡 **Suggesting** new features
 - 🤝 **Contributing** to the code
@@ -522,7 +409,7 @@ If you found this project helpful, please consider:
 
 ---
 
-*🤖 This README was automatically generated with unique design ${seed.substring(0, 8)}*
+*🤖 This README was automatically generated by a GitHub App. Please update it with project-specific information.*
 
 </div>`;
     }
@@ -547,8 +434,8 @@ If you found this project helpful, please consider:
                     ],
                     generationConfig: {
                         maxOutputTokens: this.maxTokens,
-                        temperature: 0.9, // Higher for more uniqueness
-                        topP: 0.95
+                        temperature: 0.8,
+                        topP: 0.9
                     }
                 },
                 {
