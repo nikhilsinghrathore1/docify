@@ -224,6 +224,7 @@ class GeminiService {
             if (content.includes('aws')) techStack.add('AWS');
             if (content.includes('azure')) techStack.add('Azure');
             if (content.includes('gcp') || content.includes('google cloud')) techStack.add('Google Cloud');
+            console.log("testing on it's own")
         });
         
         return Array.from(techStack);
