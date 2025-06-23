@@ -1,90 +1,90 @@
+```markdown
 <div align="center">
 
 ```
-
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░ 🌐  DOCIFY  🔗 ░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-            
+  _.--""--._
+ .'          `.
+/   O      O   \
+|    \  ^  /    |
+\   `-----'   /
+ `. _______ .'
+   //_____\\
+  (( ____ ))
+   `-----'
+  DOCIFY 🚀
+  Auto-Generated READMEs ✨
 ```
-
-### 🌐 An amazing software project 🔗
-
-[![GitHub stars](https://img.shields.io/github/stars/nikhilsinghrathore1/docify?style=for-the-badge&logo=github&color=teal)](https://github.com/nikhilsinghrathore1/docify/stargazers)
-[![GitHub license](https://img.shields.io/github/license/nikhilsinghrathore1/docify?style=for-the-badge&color=aqua)](https://github.com/nikhilsinghrathore1/docify/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/nikhilsinghrathore1/docify?style=for-the-badge&color=mint)](https://github.com/nikhilsinghrathore1/docify/issues)
-[![GitHub forks](https://img.shields.io/github/forks/nikhilsinghrathore1/docify?style=for-the-badge&color=teal)](https://github.com/nikhilsinghrathore1/docify/network)
 
 </div>
 
 ---
 
-## 📡 Features
+# 🎨 Stunning Header  
 
-- 🛰️ **Fast & Efficient** - Optimized for performance
-- 📶 **Easy to Use** - Simple and intuitive interface
-- 📦 **Lightweight** - Minimal dependencies
-- 🔧 **Customizable** - Highly configurable
-- 🌐 **Cross-Platform** - Works everywhere
+[![GitHub stars](https://img.shields.io/github/stars/nikhilsinghrathore1/docify?style=for-the-badge&logo=github&color=teal)](https://github.com/nikhilsinghrathore1/docify/stargazers)
+[![GitHub license](https://img.shields.io/github/license/nikhilsinghrathore1/docify?style=for-the-badge&color=aqua)](https://github.com/nikhilsinghrathore1/docify/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/nikhilsinghrathore1/docify?style=for-the-badge&color=mint)](https://github.com/nikhilsinghrathore1/docify/issues)
+[![GitHub forks](https://img.shields.io/github/forks/nikhilsinghrathore1/docify?style=for-the-badge&color=teal)](https://github.com/nikhilsinghrathore1/docify/network)
+[![GitHub last commit](https://img.shields.io/github/last-commit/nikhilsinghrathore1/docify?style=for-the-badge&color=blue)](https://github.com/nikhilsinghrathore1/docify/commits/main)
 
----
 
-## 🌐 Quick Start
-
-### Prerequisites
-
-- Node.js 16+ / Python 3.8+ (depending on your project)
-- Git
-
-### Installation
-
-```bash
-# 📥 Clone the repository
-git clone https://github.com/nikhilsinghrathore1/docify.git
-
-# 📂 Navigate to project directory
-cd docify
-
-# 📦 Install dependencies
-npm install
-# or
-pip install -r requirements.txt
-```
-
-### 🔗 Usage
-
-```bash
-# 🏃‍♂️ Run the project
-npm start
-# or
-python main.py
-```
+> Docify: Revolutionizing README generation with AI-powered automation! 🔥
 
 ---
 
-## 📖 Documentation
+## 🌟 Feature Highlights
 
-<details>
-<summary>📚 Click to expand documentation</summary>
+- ⚡ **Automated README Generation:**  Docify automatically creates and updates your project's README.md file.
+- 🎨 **Customizable Templates:** Tailor the generated README to match your project's style and branding.
+- 🌐 **Multi-Language Support:** Supports various programming languages and frameworks.
+- 📦 **Easy Integration:** Seamlessly integrates with your existing GitHub workflow.
+- ⚙️ **Extensible Architecture:**  Easily add new features and integrations.
+- 🚀 **Fast and Efficient:** Generates READMEs quickly without compromising quality.
 
-### Configuration
 
-```json
-{
-  "option1": "value1",
-  "option2": "value2"
-}
-```
+---
 
-### Examples
+## 🛠️ Tech Stack
+
+| Technology       | Badge                                                                    |
+|-----------------|-------------------------------------------------------------------------|
+| Node.js         | [![Node.js](https://img.shields.io/badge/Node.js-JavaScript-blue?logo=node.js&logoColor=white)](https://nodejs.org) |
+| Express.js      | [![Express.js](https://img.shields.io/badge/Express.js-JavaScript-green?logo=express&logoColor=white)](https://expressjs.com/) |
+| Octokit         | [![Octokit](https://img.shields.io/badge/Octokit-JavaScript-orange?logo=github&logoColor=white)](https://github.to/octokit/rest.js) |
+| Axios           | [![Axios](https://img.shields.io/badge/Axios-JavaScript-purple?logo=axios&logoColor=white)](https://axios-http.com/) |
+| Gemini API       | [![Gemini API](https://img.shields.io/badge/Gemini%20API-AI-lightgrey)](https://cloud.google.com/vertex-ai/docs/generative-ai/models/gemini) |
+| MongoDB (Example) | [![MongoDB](https://img.shields.io/badge/MongoDB-Database-yellow?logo=mongodb&logoColor=white)](https://www.mongodb.com/) |
+
+
+---
+
+## 🚀 Quick Start Guide
+
+1. **Clone the repository:** `git clone https://github.com/nikhilsinghrathore1/docify.git`
+2. **Install dependencies:** `npm install`
+3. **Set environment variables:** (See `.env.example` for details)
+4. **Run the application:** `npm start`
+
+
+---
+
+## 📖 Detailed Usage
+
+> This section provides detailed usage instructions and code examples.
+
+**Example API call (Illustrative):**
 
 ```javascript
-// Example usage
-const example = new Example();
-example.run();
-```
+const axios = require('axios');
 
-</details>
+axios.post('/webhook', { /* webhook payload */ })
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+```
 
 ---
 
@@ -92,65 +92,84 @@ example.run();
 
 ```
 docify/
-├── 📁 src/          # Source code
-├── 📁 docs/         # Documentation
-├── 📁 tests/        # Test files
-├── 📄 README.md     # You are here
-└── 📄 package.json  # Dependencies
+├── src/
+│   ├── server.js
+│   └── services/
+│       ├── github.js
+│       └── gemini.js
+├── logs/
+└── package.json
 ```
 
 ---
 
-## 🤝 Contributing
+## 🎯 API Documentation
 
-We love contributions! 📶
+| Endpoint      | Method | Description                                      | Request Body       | Response Body      |
+|---------------|--------|--------------------------------------------------|--------------------|---------------------|
+| `/webhook`    | POST    | Processes GitHub webhook events.                 | GitHub webhook data | Success/Error       |
+| `/`            | GET     | Checks if the app is running.                   |                    | App status         |
 
-1. 🍴 **Fork** the repository
-2. 🌿 **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. 💾 **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. 📤 **Push** to the branch (`git push origin feature/amazing-feature`)
-5. 🔄 **Open** a Pull Request
 
 ---
 
-## 📊 Stats
+## 🔧 Configuration Options
+
+| Option             | Description                                   | Default Value |
+|----------------------|-----------------------------------------------|----------------|
+| `PORT`              | Server port                                     | `3000`         |
+| `GITHUB_APP_ID`     | GitHub App ID                                   |                |
+| `GITHUB_PRIVATE_KEY_PATH` | Path to GitHub App private key file            |                |
+| `GITHUB_WEBHOOK_SECRET` | Secret for verifying webhook signatures         |                |
+| `GEMINI_API_KEY`    | Gemini API Key                                  |                |
+
+
+---
+
+## 📸 Screenshots/Demo
+
+**(Include screenshots or a GIF demonstrating the app's functionality here)**
+
+
+---
+
+## 🤝 Contributing Guidelines
+
+We welcome contributions! Please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature.
+3. Make your changes and commit them with clear messages.
+4. Push your branch to your forked repository.
+5. Create a pull request.
+
+
+---
+
+## 📜 License & Acknowledgments
+
+This project is licensed under the MIT License.  We thank the creators of [list libraries/tools used].
+
+
+---
+
+## 👥 Contributors
+
+**(Add contributor avatars and links here)**
+
+
+---
+
+## 📞 Support & Contact
+
+[![Twitter](https://img.shields.io/twitter/follow/nikhilsinghrathore1?style=social)](https://twitter.com/nikhilsinghrathore1)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nikhilsinghrathore1)
+[![Email](https://img.shields.io/badge/Email-black?logo=gmail&logoColor=white)](mailto:nikhilsinghrathore1@gmail.com)
+
+
+---
 
 <div align="center">
-
-![GitHub repo size](https://img.shields.io/github/repo-size/nikhilsinghrathore1/docify?style=flat-square&color=teal)
-![GitHub language count](https://img.shields.io/github/languages/count/nikhilsinghrathore1/docify?style=flat-square&color=aqua)
-![GitHub top language](https://img.shields.io/github/languages/top/nikhilsinghrathore1/docify?style=flat-square&color=mint)
-![GitHub last commit](https://img.shields.io/github/last-commit/nikhilsinghrathore1/docify?style=flat-square&color=teal)
-
+  Made with ❤️ by nikhilsinghrathore1
 </div>
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 💝 Support
-
-If you found this project helpful, please consider:
-
-- 🌐 **Starring** the repository
-- 🐛 **Reporting** bugs
-- 💡 **Suggesting** new features
-- 🤝 **Contributing** to the code
-
----
-
-<div align="center">
-
-### 🙏 Thank you for using docify!
-
-**Made with ❤️ by [nikhilsinghrathore1](https://github.com/nikhilsinghrathore1)**
-
----
-
-*🤖 This README was automatically generated with unique design ca08fff5*
-
-</div>
+```
