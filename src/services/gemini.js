@@ -5,7 +5,7 @@ class GeminiService {
         this.apiKey = process.env.GEMINI_API_KEY;
         this.baseURL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
         this.model = 'gemini-1.5-flash-latest';
-        this.maxTokens = 8000; // Increased for more detailed content
+        this.maxTokens = 10000; // Increased for more detailed content
     }
 
     async generateReadme(files, repository) {
@@ -80,7 +80,7 @@ class GeminiService {
         const techStack = this.detectTechStack(files);
         const projectType = this.detectProjectType(files, repository);
         
-        let prompt = `Create an exceptionally visually appealing and professional README.md file for this ${projectType} project using ONLY pure Markdown syntax. `;
+        let prompt = `Create an exceptionally visually appealing and professional README.md file for this ${projectType} project using ONLY pure Markdown syntax. don't use image tag or any html tags`;
         prompt += `The repository is "${repository.name}" by "${repository.owner.login}". `;
     
         if (repository.description) {
@@ -236,18 +236,13 @@ class GeminiService {
         
         // Check for specific project types
         if (name.includes('api') || description.includes('api')) return 'REST API';
-        if (name.includes('bot') || description.includes('bot')) return 'Bot Application';
-        if (name.includes('cli') || description.includes('command sline')) return 'CLI Tool';
-        if (name.includes('lib') || name.includes('library')) return 'Library/Package';
         if (name.includes('app') || description.includes('application')) return 'Application';
         if (name.includes('web') || description.includes('website')) return 'Web Application';
         if (name.includes('mobile') || description.includes('mobile')) return 'Mobile Application';
         if (name.includes('game') || description.includes('game')) return 'Game';
-        if (name.includes('tool') || description.includes('tool')) return 'Development Tool';
         
         // Check file patterns
         const hasPackageJson = files.some(f => f.path.includes('package.json'));
-        const hasRequirementsTxt = files.some(f => f.path.includes('requirements.txt'));
         const hasDockerfile = files.some(f => f.path.includes('Dockerfile'));
         
         if (hasPackageJson) return 'Node.js Application';
@@ -415,7 +410,6 @@ If you found this project helpful, please consider:
 </div>`;
     }
 
-    // Enhanced method for different Gemini models with visual focus
     async generateReadmeWithModel(files, repository, modelName = 'gemini-1.5-pro-latest') {
         try {
             const prompt = this.buildEnhancedPrompt(files, repository);

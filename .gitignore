@@ -78,6 +78,7 @@ jspm_packages/
 # DynamoDB Local files
 .dynamodb/
 
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -97,3 +98,4 @@ Thumbs.db
 # Temporary files
 tmp/
 temp/
+readmepusher.2025-06-19.private-key.pem
