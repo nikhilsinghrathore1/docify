@@ -102,6 +102,7 @@ class GeminiService {
         prompt += `- Implement consistent spacing and formatting patterns\n\n`;
     
         prompt += `📋 REQUIRED SECTIONS (pure markdown styling):\n`;
+        prompt += `📋 MOST IMPORTANT RULE : do not use any html tag any where `;
         prompt += `1. 🎨 Stunning header with ASCII title art, tagline, and badge gallery\n`;
         prompt += `2. 🌟 Feature highlights using markdown lists with emojis\n`;
         prompt += `3. 🛠️ Tech stack displayed as badge grid using markdown tables\n`;
