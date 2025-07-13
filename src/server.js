@@ -22,6 +22,7 @@ const RATE_LIMIT_MS = RATE_LIMIT_HOURS * 60 * 60 * 1000; // 2 hours in milliseco
 console.log("testing")
 console.log("hoja hoja")
 console.log("testing ")
+console.log("testing the image part of it")
 // Function to check and update rate limit
 function checkRateLimit(repositoryId, installationId) {
     const key = `${installationId}-${repositoryId}`;
