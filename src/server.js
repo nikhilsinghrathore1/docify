@@ -23,6 +23,7 @@ console.log("testing")
 console.log("hoja hoja")
 console.log("idkwid")
 console.log("thank u")
+console.log("thank u")
 // Function to check and update rate limit
 function checkRateLimit(repositoryId, installationId) {
     const key = `${installationId}-${repositoryId}`;
