@@ -23,7 +23,7 @@ console.log("testing")
 console.log("hoja hoja")
 console.log("testing ")
 console.log("testing database")
-console.log("testing the image part of it")
+console.log("forgetting the basics things")
 // Function to check and update rate limit
 function checkRateLimit(repositoryId, installationId) {
     const key = `${installationId}-${repositoryId}`;
