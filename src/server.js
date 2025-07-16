@@ -23,6 +23,7 @@ const RATE_LIMIT_MS = RATE_LIMIT_HOURS * 60 * 60 * 1000; // 2 hours in milliseco
 function checkRateLimit(repositoryId, installationId) {
     const key = `${installationId}-${repositoryId}`;
     const now = Date.now();
+    console.log("testing again");
     
     if (rateLimitStore.has(key)) {
         const lastUsed = rateLimitStore.get(key);
